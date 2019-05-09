@@ -1,0 +1,15 @@
+.basic {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-style: inset;
+    border-radius: 30px;
+    border-color: blueviolet;
+    border-width: 2px;
+    padding: 10px;
+    background-color: bisque;
+}
+
+.header1 {
+    text-align: center;
+    display: block;
+    margin: auto;
+}
