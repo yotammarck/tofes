@@ -1,0 +1,22 @@
+
+{% extends "base.html"%} 
+
+
+
+{% block content %}
+
+            <P> hi you are {{age}}. that means that your rights are: </P>
+            <div class = "row">
+                {%for right in rights %}
+                    <div class = "col">
+                        <div class="card">
+                            <div class="card-body">
+                                {{right.title}}
+                                {{right.description}}
+                                <a href="{{right.link}}">blaba</a>
+                            </div>
+                        </div>    
+                    </div>
+                {% endfor %}
+            </div>  
+{% endblock %}
