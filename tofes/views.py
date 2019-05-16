@@ -49,6 +49,8 @@ def details(request):
 def stats(request):
         countnum = 0
         countnumkid = 0
+        countnumwork = 0
+        countnumold = 0
         entry = Entry1.objects.all()
         for name1 in entry:
             countnum = countnum + 1
@@ -57,4 +59,11 @@ def stats(request):
         for name1 in entrykid:
             countnumkid = countnumkid + 1
         
-        return render(request, "stats.html",{"countnum":countnum,"countnumkid":countnumkid})
+        entrywork = Entry1.objects.filter( inputage__lte = 65, inputage__gte = 15 )
+        for name1 in entrywork:
+            countnumwork = countnumwork + 1
+
+        entryold = Entry1.objects.filter( inputage__lte = 120, inputage__gte = 65 )
+        for name1 in entryold:
+            countnumold = countnumold + 1
+        return render(request, "stats.html",{"countnum":countnum,"countnumkid":countnumkid,"countnumwork":countnumwork,"countnumold":countnumold})
