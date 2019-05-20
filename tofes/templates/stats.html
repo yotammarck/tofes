@@ -31,6 +31,17 @@ function drawChart() {
 <h1> the number of submits is: {{countnum}}</h1>
 <div id="piechart"></div>
 
-
-
+<h1> our last 10 names created are:</h1>
+  <div class = "row">
+    <ul class="list-group">          
+                {%for lasttenentry in lasttenentrys %}
+                    
+                     <li class="list-group-item">{{lasttenentry.first_name}}</li>   
+                     
+                                
+                    
+                {% endfor %}
+    
+    </ul>
+  </div>
 {% endblock %}

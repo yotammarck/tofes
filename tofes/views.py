@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Right, Entry1
+from .models import Right, Entry
 
 # Create your views here.
 def index(request):
@@ -15,7 +15,7 @@ def result(request):
     fname = request.POST['fname']
     age = agecheck(request.POST['age'])
     agenum = request.POST['age']
-    e = Entry1(name1=request.POST['name'], fname = request.POST['fname'], inputage = request.POST['age'])
+    e = Entry(name1=request.POST['name'], fname = request.POST['fname'], input_age = request.POST['age'])
     e.save()
     
     return render(request, "result.html",{"x":name, "f":fname, "a":age ,"agenum":agenum})
@@ -46,24 +46,31 @@ def details(request):
     #     rights = ["five", "six", "seven"]
     return render(request, "details.html",{"age":age, "rights":rights})
 
+def counter(age1,age2):
+    return Entry.objects.filter(input_age__lte = age2, input_age__gte = age1).count()
+    
+
 def stats(request):
-        countnum = 0
-        countnumkid = 0
-        countnumwork = 0
-        countnumold = 0
-        entry = Entry1.objects.all()
-        for name1 in entry:
-            countnum = countnum + 1
-
-        entrykid = Entry1.objects.filter( inputage__lte = 15, inputage__gte = 0 )
-        for name1 in entrykid:
-            countnumkid = countnumkid + 1
+        countnum =  Entry.objects.count()
+        countnumkid = Entry.objects.filter(input_age__lte = 15, input_age__gte = 0 ).count()
+        countnumwork = Entry.objects.filter(input_age__lte = 65, input_age__gte = 16).count()
+        countnumold = Entry.objects.filter(input_age__gte = 66).count()
+        lasttenentrys = Entry.objects.order_by('-created').all()[:10]
+        # counter(age1,age2)
+        # entry = Entry.objects.all()
+        # for name1 in entry:
+        #     countnum = countnum + 1
         
-        entrywork = Entry1.objects.filter( inputage__lte = 65, inputage__gte = 15 )
-        for name1 in entrywork:
-            countnumwork = countnumwork + 1
+        # entrykid = Entry.objects.filter( input_age__lte = 15, input_age__gte = 0 )
+        # for name1 in entrykid:
+        #     countnumkid = countnumkid + 1
+        
+        # entrywork = Entry.objects.filter( input_age__lte = 65, input_age__gte = 15 )
+        # for name1 in entrywork:
+        #     countnumwork = countnumwork + 1
 
-        entryold = Entry1.objects.filter( inputage__lte = 120, inputage__gte = 65 )
-        for name1 in entryold:
-            countnumold = countnumold + 1
-        return render(request, "stats.html",{"countnum":countnum,"countnumkid":countnumkid,"countnumwork":countnumwork,"countnumold":countnumold})
+        # entryold = Entry.objects.filter( input_age__lte = 120, input_age__gte = 65 )
+        # for name1 in entryold:
+        #     countnumold = countnumold + 1
+        return render(request, "stats.html",{"countnum":countnum,"countnumkid":countnumkid,
+        "countnumwork":countnumwork,"countnumold":countnumold,"lasttenentrys":lasttenentrys})

@@ -14,13 +14,10 @@ class Right(models.Model):
         return self.title+" ("+str(self.minage)+"-"+str(self.maxage)+")"
 
 
-class Entry1(models.Model):
-    name1 = models.CharField(max_length=512)
-    fname = models.CharField(max_length=512)
-    inputage = models.PositiveSmallIntegerField()
+class Entry(models.Model):
+    first_name = models.CharField(max_length=512)
+    last_name = models.CharField(max_length=512)
+    input_age = models.PositiveSmallIntegerField()
     created = models.DateTimeField(auto_now_add = True)
     def __str__(self):
         return self.name1+" "+self.fname
-
-class Resnum(models.Model):
-    num = models.PositiveSmallIntegerField()
