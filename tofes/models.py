@@ -20,4 +20,4 @@ class Entry(models.Model):
     input_age = models.PositiveSmallIntegerField()
     created = models.DateTimeField(auto_now_add = True)
     def __str__(self):
-        return self.name1+" "+self.fname
+        return self.first_name+" "+self.last_name

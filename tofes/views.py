@@ -15,7 +15,7 @@ def result(request):
     fname = request.POST['fname']
     age = agecheck(request.POST['age'])
     agenum = request.POST['age']
-    e = Entry(name1=request.POST['name'], fname = request.POST['fname'], input_age = request.POST['age'])
+    e = Entry(first_name=request.POST['name'], last_name = request.POST['fname'], input_age = request.POST['age'])
     e.save()
     
     return render(request, "result.html",{"x":name, "f":fname, "a":age ,"agenum":agenum})
